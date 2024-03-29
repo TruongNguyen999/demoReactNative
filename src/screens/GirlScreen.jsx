@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Text } from "react-native";
 import { Input, Button } from "@rneui/themed";
 
 import styled from "styled-components";
+import { senPushNotification } from "../service/api";
 
 const ViewContainer = styled(View)`
   padding: 20px 16px 0 16px;
@@ -38,6 +39,8 @@ const Heading = styled(Text)`
   text-align: center;
 `;
 
+const token = 'ExponentPushToken[wMTbgRKMywMbr1PuAvRLQ-]'
+
 const GirlScreen = () => {
   return (
     <ViewContainer>
@@ -48,7 +51,7 @@ const GirlScreen = () => {
       <Button title={"Xác nhận mã số"} />
       <Heading>Triệu hồi gấu đực</Heading>
       <ViewContent>
-        <ButonContainer color="#e74c3c">
+        <ButonContainer color="#e74c3c" onPress={() => senPushNotification(token, 'Gấu cái gọi 😹', '😹 Em nhớ anh quá huhuhu')}>
           <ButonText>😹 Em nhớ anh quá</ButonText>
         </ButonContainer>
         <ButonContainer color="#2980b9">
