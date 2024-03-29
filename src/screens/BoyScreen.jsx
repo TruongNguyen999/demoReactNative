@@ -18,26 +18,6 @@ const Heading = styled(Text)`
 `;
 
 async function getNotificationToken() {
-
-  // const { status } = await Notifications.getPermissionsAsync()
-
-  // if(status !== 'granted') {
-  //   const {status} = await Notifications.requestPermissionsAsync()
-  //   if(status !== 'granted') {
-  //     alert('failed to get notification token')
-  //     return
-  //   }
-  // }
-
-  // const tokenData = await Notifications.getExpoPushTokenAsync({
-  //   projectId: '123',
-  // })
-  // console.log(tokenData)
-
-  // const token = tokenData.data
-  // console.log({token})
-  // return token
-
   let token;
 
   if (Platform.OS === 'android') {
@@ -72,13 +52,10 @@ async function getNotificationToken() {
 }
 
 const BoyScreen = () => {
-  const onPressGetNoti = () => {
-    getNotificationToken().then(token => console.log(token))
-  }
   return (
     <ViewContainer>
       <Heading>Bạn chưa có mã số, bấm vào để lấy mã</Heading>
-      <Button title={"Bấm để lấy mã số"} onPress={onPressGetNoti} />
+      <Button title={"Bấm để lấy mã số"} onPress={getNotificationToken} />
     </ViewContainer>
   );
 };
