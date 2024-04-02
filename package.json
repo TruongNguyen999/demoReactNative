@@ -2,6 +2,7 @@
   "name": "pingdemo",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "slug": "demoreactnative",
   "scripts": {
     "start": "npx expo start",
     "android": "expo start --android",
