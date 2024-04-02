@@ -27,7 +27,7 @@ const HomeScreen = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen 
-        name="Gấu Cái" 
+        name="Gấu Cái"
         component={GirlScreen} 
         options={OptionHeader('girl')}
       />

@@ -5,6 +5,8 @@ import { View, Text, Platform } from "react-native";
 import { Button } from "@rneui/themed";
 
 import styled from "styled-components";
+import { useState } from 'react';
+import { pushToken } from '../service/api';
 
 const ViewContainer = styled(View)`
   padding: 20px 16px 0 16px;
@@ -43,7 +45,7 @@ async function getNotificationToken() {
     token = await Notifications.getExpoPushTokenAsync({
       projectId: Constants.expoConfig.extra.eas.projectId,
     });
-    console.log(token);
+    // console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -52,10 +54,22 @@ async function getNotificationToken() {
 }
 
 const BoyScreen = () => {
+  const [token, setToken] = useState()
+
+  const onGetNoti = async () => {
+    const tokenData = await getNotificationToken()
+    // console.log(tokenData);
+    if(tokenData){
+      const data = await pushToken(tokenData)
+      console.log(data);
+      setToken(data)
+    }
+  }
+
   return (
     <ViewContainer>
-      <Heading>Bạn chưa có mã số, bấm vào để lấy mã</Heading>
-      <Button title={"Bấm để lấy mã số"} onPress={getNotificationToken} />
+      <Heading> {token ? `Mã số của bạn là ${token.id}` : "Bạn chưa có mã số, bấm vào để lấy mã" }</Heading>
+      <Button title={"Bấm để lấy mã số"} onPress={onGetNoti} />
     </ViewContainer>
   );
 };
