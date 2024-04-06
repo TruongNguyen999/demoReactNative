@@ -61,6 +61,7 @@ const BoyScreen = () => {
   const [demoToken, setDemoToken] = useState()
 
   const onGetNoti = async () => {
+    alert("start")
     const tokenData = await getNotificationToken()
 
     // test
