@@ -55,19 +55,25 @@ async function getNotificationToken() {
 
 const BoyScreen = () => {
   const [token, setToken] = useState()
+  const [demoToken, setDemoToken] = useState()
 
   const onGetNoti = async () => {
     const tokenData = await getNotificationToken()
+
+    // test
+    setDemoToken(tokenData)
+
+
     // console.log(tokenData);
     if(tokenData){
       const data = await pushToken(tokenData)
-      console.log(data);
       setToken(data)
     }
   }
 
   return (
     <ViewContainer>
+      <Heading> {demoToken ? demoToken : "" }</Heading>
       <Heading> {token ? `Mã số của bạn là ${token.id}` : "Bạn chưa có mã số, bấm vào để lấy mã" }</Heading>
       <Button title={"Bấm để lấy mã số"} onPress={onGetNoti} />
     </ViewContainer>
