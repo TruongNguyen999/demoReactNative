@@ -22,19 +22,20 @@ const Heading = styled(Text)`
 async function getNotificationToken() {
   let token;
 
-  if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-    });
-  }
+  // if (Platform.OS === 'android') {
+  //   Notifications.setNotificationChannelAsync('default', {
+  //     name: 'default',
+  //     importance: Notifications.AndroidImportance.MAX,
+  //     vibrationPattern: [0, 250, 250, 250],
+  //     lightColor: '#FF231F7C',
+  //   });
+  // }
 
-  if (Device.isDevice) {
+  // if (Device.isDevice) {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== 'granted') {
+      alert(existingStatus);
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
@@ -45,10 +46,12 @@ async function getNotificationToken() {
     token = await Notifications.getExpoPushTokenAsync({
       projectId: Constants.expoConfig.extra.eas.projectId,
     });
+    alert(JSON.stringify(token));
+
     // console.log(token);
-  } else {
-    alert('Must use physical device for Push Notifications');
-  }
+  // } else {
+  //   alert('Must use physical device for Push Notifications');
+  // }
 
   return token.data;
 }
