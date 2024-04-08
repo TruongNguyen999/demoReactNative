@@ -36,6 +36,7 @@ async function getNotificationToken() {
     let finalStatus = existingStatus;
     if (existingStatus !== 'granted') {
       alert(existingStatus);
+      console.log("TRUONG LOG", existingStatus)
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
@@ -47,6 +48,7 @@ async function getNotificationToken() {
       projectId: Constants.expoConfig.extra.eas.projectId,
     });
     alert(JSON.stringify(token));
+    console.log("TRUONG LOG", token)
 
     // console.log(token);
   // } else {
@@ -66,6 +68,7 @@ const BoyScreen = () => {
 
     // test
     setDemoToken(tokenData)
+    console.log("TRUONG LOG", tokenData)
 
 
     // console.log(tokenData);
